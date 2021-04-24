@@ -1,4 +1,3 @@
-```jsx
 <!Doctype html>
 <html lang="ko">
 <head>
@@ -14,9 +13,53 @@
     <script>
         function showMiseInfo() {
             // 여기에 코드를 입력하세요
+            $.ajax({
+                type: "GET", // GET 방식으로 요청한다.
+                url: "http://openapi.seoul.go.kr:8088/6d4d776b466c656533356a4b4b5872/json/RealtimeCityAir/1/99",
+                data: {}, // 요청하면서 함께 줄 데이터 (GET 요청시엔 비워두세요)
+                success: function (response) { // 서버에서 준 결과를 response라는 변수에 담음
+                    console.log(response) // 서버에서 준 결과를 이용해서 나머지 코드를 작성
 
+
+                    // 전부 다
+                    let miseList = response['RealtimeCityAir']['row']
+                        console.log(miseList)
+                    let miseInfo = $('#mise-info')
+                    miseInfo.empty()
+                    for (let i = 0; i < miseList.length; i++) {
+                        let name = miseList[i]['MSRSTE_NM'];
+                        let pm10 = miseList[i]['PM10'];
+                        let temphtml = `<li>${name} : ${pm10}</li>`
+                        // miseInfo.append(temphtml);
+                        $('#mise-info').append(temphtml);
+                    }
+
+                    // 상태 따라 색이 다르게 나오는 것
+                    // let miseList = response['RealtimeCityAir']['row']
+                    // console.log(miseList)
+                    // let miseInfo = $('#mise-info')
+                    // miseInfo.empty();
+
+                    // for (let i = 0; i < miseList.length; i++) {
+                    //     console.log(miseList[i])
+                    //     let name = miseList[i]['MSRSTE_NM'];
+                    //     let pm10 = miseList[i]['PM10'];
+                    //     let tempHtml = '';
+                    //     if (pm10 > 25) {
+                    //         tempHtml = `<li style="color:red">${name} : ${pm10}</li>`
+                    //     } else {
+                    //         tempHtml = `<li>${name} : ${pm10}</li>`
+                    //     }
+                    //     $('#mise-info').append(tempHtml);
+                    // }
+                }
+            })
         }
     </script>
+
+    <!-- let rows = response["RealtimeCityAir"]["row"];
+    for (let i = 0; i < rows.length; i++) { let guName=rows[i]['MSRSTE_NM']; let guMise=rows[i]['PM10']; let tempHtml=`<li>${guName} : ${guMise}</li>`
+        $('#mise-info').append(tempHtml); -->
 </head>
 <body>
 <h1>jQuery+Ajax의 조합을 연습하자!</h1>
@@ -35,4 +78,3 @@
 </div>
 </body>
 </html>
-```
