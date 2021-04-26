@@ -2,3 +2,5 @@
 
 
 구로이룸 start
+
+DESKTOP GIT CLONE
