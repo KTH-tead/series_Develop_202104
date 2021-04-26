@@ -899,14 +899,25 @@
                 stationId: "ST-58",
             },
         ]
-         for (let i = 1; i < 5 )
+        for (let i = 0; i < bikes.length; i++) {
+            let temphtml = `<li>${name} : ${pm10}</li>`
+        }
     </script>
 </head>
 
 <body>
     - Q1. 5대 이하 정류장의 이름을 출력해주세요.
     <button onclick="fiveOverBike()">이 버튼을 눌러보세요</button>
+    <div>
+        <ul id="">
+            <li>
+
+            </li>
+        </ul>
+
+    </div>
     - Q2. 입력한 자전거 대수 이하 정류장의 이름을 출력하는 함수를 만들어주세요.
-    <button onclick="handleClick2()">이 버튼을 눌러보세요</button></body>
+    <button onclick="handleClick2()">이 버튼을 눌러보세요</button>
+</body>
 
 </html>
