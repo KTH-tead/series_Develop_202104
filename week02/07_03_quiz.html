@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>스파르타코딩클럽 | 자바스크립트 연습</title>
+    <!-- jQuery를 import 합니다 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         let bikes = [
             {
@@ -899,25 +901,78 @@
                 stationId: "ST-58",
             },
         ]
+
+        // 5대 이하 콘솔창 입력 내용 -> 내용 자동으로 콘솔창에 뜸.
         for (let i = 0; i < bikes.length; i++) {
-            let temphtml = `<li>${name} : ${pm10}</li>`
+            if (bikes[i]['parkingBikeTotCnt'] <= 5) {
+                let station = bikes[i]['stationName']
+                console.log(station);
+            }
+        }
+
+        // 5대 이하 내용이 웹페이지에 나오도록 수정.
+        // jquery 안가져와서 $ undefined 떴었음...
+        function fiveOverBike() {
+            let stationInfo = $('#bikeFiveStationInfo')
+            stationInfo.empty()
+            for (let i = 0; i < bikes.length; i++) {
+                if (bikes[i]['parkingBikeTotCnt'] <= 5) {
+                    let fiveBikesStation = bikes[i]['stationName']
+                    console.log(fiveBikesStation);
+                    let bikestation = `<li>${fiveBikesStation}</li>`;
+                    stationInfo.append(bikestation);
+                }
+            }
+        }
+
+        // 2대 이하 콘솔창 입력 내용 -> 버튼 클릭시 등장
+        // # 표기 계속 까먹어서 실행 안되서 30분 날림..
+        function showBikeNum() {
+            let bikeNum = $('#inputNum').val();
+            console.log(bikeNum)
+            for (let i = 0; i < bikes.length; i++) {
+                if (bikes[i]['parkingBikeTotCnt'] <= bikeNum) {
+                    let bikeCountStation = bikes[i]['stationName']
+                    console.log(bikeCountStation);
+                    let bikeShowStation = `<li>${bikeCountStation}</li>`;
+                    $('#showBikeCount').append(bikeShowStation);
+                }
+            }
         }
     </script>
 </head>
 
 <body>
     - Q1. 5대 이하 정류장의 이름을 출력해주세요.
-    <button onclick="fiveOverBike()">이 버튼을 눌러보세요</button>
+    <button onclick="fiveOverBike()">5대 이하 정류장</button>
     <div>
-        <ul id="">
-            <li>
-
-            </li>
+        <ul id="bikeFiveStationInfo">
+            <li>5대 이하 정류장1</li>
+            <li>5대 이하 정류장2</li>
         </ul>
 
     </div>
     - Q2. 입력한 자전거 대수 이하 정류장의 이름을 출력하는 함수를 만들어주세요.
-    <button onclick="handleClick2()">이 버튼을 눌러보세요</button>
+    <input id="inputNum" type="number" placeholder="자전거 대수" min="0">
+    <button onclick="showBikeNum()">버튼 클릭!</button>
+    <div>
+        <ul id="showBikeCount">
+
+        </ul>
+    </div>
 </body>
 
 </html>
+
+
+
+        <!-- 2대 이하 콘솔창 입력 내용 - 버튼 클릭시 등장
+        function showBikeNum(bikeNum) {
+            for (let i = 0; i < bikes.length; i++) {
+                if (bikes[i]['parkingBikeTotCnt'] <= bikeNum) {
+                    let bikeCountStation = bikes[i]['stationName']
+                    console.log(bikeCountStation);
+                }
+            }
+        }
+        showBikeNum(2);  -->
